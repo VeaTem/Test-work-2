@@ -17,7 +17,7 @@ const fonter = require("gulp-fonter"); // объявления
 const ttf2Towoff2 = require("gulp-ttf2woff2"); // объявления
 
 const del = require("del"); // удаление файлов
-const gulpAutoprefixer = require("gulp-autoprefixer");
+const gulpautoprefixer = require("gulp-autoprefixer");
 const browserSync = require("browser-sync").create();
 
 function syncBrowser() {
@@ -36,7 +36,7 @@ function styles() {
         .pipe(webpcss())
         .pipe(concat("style.min.css"))
         .pipe(
-            autoprefixer({
+            gulpautoprefixer({
                 overrideBrowserslist: ["last 10 versions"],
                 grid: true,
             })
@@ -49,7 +49,12 @@ function styles() {
 }
 
 function scripts() {
-    return src(["node_modules/jquery/dist/jquery.js", "app/js/*.js", "!app/js/main.min.js"])
+    return src([
+            "node_modules/jquery/dist/jquery.js",
+            'node_modules/slick-carousel/slick/slick.js',
+            "app/js/webpcheck.js",
+            "app/js/main.js",
+        ])
         .pipe(concat("main.min.js"))
         .pipe(size({ title: "JS before весит:" }))
         .pipe(uglify())
@@ -140,8 +145,8 @@ async function fontsStyle() {
 
 function images() {
     return src("app/images/**/*.*")
-        .pipe(dest("dist/images"))
         .pipe(webp())
+        .pipe(dest("app/images/"))
         .pipe(size({ title: "IMG before весит:" }))
         .pipe(
             imagemin([
@@ -154,7 +159,7 @@ function images() {
             ])
         )
         .pipe(size({ title: "IMG after весит:" }))
-        .pipe(dest("dist/images"));
+        .pipe(dest("app/images/"));
 }
 
 function build() {
@@ -171,7 +176,7 @@ function cleanDist() {
 
 
 function watching() {
-    watch(["app/scss/**/*.scss"], styles);
+    watch(["app/scss/style.scss"], styles);
     watch(["app/js/**/*.js", "!app/js/main.min.js"], scripts);
     watch(["app/**/*.html"]).on("change", browserSync.reload);
 }
@@ -185,4 +190,4 @@ exports.watching = watching;
 exports.fonts = series(fonts, fonts2, fontsStyle)
 exports.cleanDist = cleanDist;
 exports.build = series(cleanDist, images, build);
-exports.default = parallel(styles, scripts, syncBrowser, watching);
+exports.default = parallel(images, styles, scripts, syncBrowser, watching);

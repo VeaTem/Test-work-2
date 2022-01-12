@@ -1,1 +1,243 @@
-@import 'fonts';
+            @import 'fonts';
+            @import 'vars';
+            @import 'reset';
+            @import 'box-sizing';
+            @import 'libs';
+            body {
+                @extend %Poppins-400;
+                font-size: 16px;
+                color: #fff;
+                background: #130645;
+            }
+            
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+            
+            .container-big {
+                max-width: 1315px;
+                margin: 0 auto;
+                padding: 0 15px;
+            }
+            
+            .container {
+                max-width: 1130px;
+                margin: 0 auto;
+                padding: 0 15px;
+            }
+            
+            .header {
+                background-color: #0C032E;
+                padding: 28px 0 19px;
+                border-bottom: 1px solid #4024B2;
+                &__inner {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+            }
+            
+            .user {
+                &-button {
+                    border: 2px solid #4426B9;
+                    border-radius: 24px;
+                    background-color: transparent;
+                    width: 42px;
+                    height: 42px;
+                    cursor: pointer;
+                    &:hover {
+                        background: linear-gradient(180deg, #4125B6 0%, #7357EC 100%);
+                    }
+                }
+                &-nav {
+                    display: flex;
+                    align-items: center;
+                    &__pic {
+                        margin-left: 3px;
+                    }
+                    &__item {
+                        display: flex;
+                        align-items: center;
+                    }
+                    &__item+.user-nav__item {
+                        margin-left: 32px;
+                    }
+                    span {
+                        @extend %Poppins-500;
+                        font-size: 6px;
+                        text-transform: lowercase;
+                        border: 1px solid #4326B8;
+                        border-radius: 12px;
+                        padding: 1px 8px 2px;
+                        margin-left: 3px;
+                    }
+                }
+            }
+            
+            .presentation {
+                &__inner {
+                    margin-right: -160px;
+                    padding-top: 95px;
+                    padding-bottom: 213px;
+                    background-image: url(../images/presentation-bcg.jpg);
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                }
+                &__title {
+                    @extend %Poppins-600;
+                    font-size: 48px;
+                    line-height: 65px;
+                    background: linear-gradient( rgba(88, 245, 242, 1), rgba(95, 57, 255, 1));
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    margin-bottom: 16px;
+                    &-descr {
+                        display: block;
+                        color: rgba(240, 240, 240, 1);
+                        font-size: 18px;
+                        margin-bottom: 54px;
+                    }
+                }
+                &__btn+.presentation__btn {
+                    margin-left: 16px;
+                }
+            }
+            
+            .link-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border: 3px solid rgba(64, 36, 178, 0.3);
+                background: rgba(64, 36, 178, 0.3);
+                border-radius: 12px;
+                color: #fff;
+                width: 215px;
+                height: 48px;
+                font-size: 16px;
+                line-height: 24px;
+                @extend %Poppins-400;
+                &:hover {
+                    background: linear-gradient(180deg, #4125B6 0%, #7357EC 100%);
+                }
+            }
+            
+            .currency {
+                position: relative;
+                margin-bottom: 135px;
+                &-box {
+                    margin-top: -30px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-content: center;
+                    &__item {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        background-image: url(../images/currency-bcg.svg);
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        width: 247px;
+                        height: 116px;
+                        transition: all 0.5s;
+                        &:hover {
+                            transform: scale(110%)
+                        }
+                    }
+                }
+                &__name {
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    color: rgba(255, 255, 255, 0.7);
+                    margin-bottom: 5px;
+                }
+                &__rate {
+                    font-size: 14px;
+                    color: #27AB33;
+                    text-transform: capitalize;
+                    &--down {
+                        color: #FF3035;
+                    }
+                }
+                &__cost {
+                    @extend %Poppins-600;
+                    font-size: 24px;
+                    line-height: 36px;
+                    text-transform: capitalize;
+                }
+            }
+            
+            .chat {
+                position: absolute;
+                right: -80px;
+                top: 45px;
+                background-color: transparent;
+                width: 56px;
+                height: 56px;
+                background: rgba(64, 36, 178, 0.3);
+                border: 2px solid #4024B2;
+                border-radius: 32px;
+                cursor: pointer;
+                &:hover {
+                    background: linear-gradient(180deg, #4125B6 0%, #7357EC 100%);
+                }
+            }
+            
+            .slider {
+                position: relative;
+                &__img {
+                    &-item {
+                        transition: all 0.5s;
+                        &:hover {
+                            transform: scale(95%);
+                        }
+                    }
+                }
+                .slick-arrow {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    z-index: 1;
+                    font-size: 0;
+                    background-color: transparent;
+                    border-radius: 50%;
+                    border: 2px solid #4024B2;
+                    width: 48px;
+                    height: 48px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: 24px;
+                    cursor: pointer;
+                    transition: all 0.5s;
+                    &:hover {
+                        box-shadow: 0px 0px 15px 5px #4024b2;
+                    }
+                }
+                .slick-next {
+                    z-index: 2;
+                    right: -65px;
+                    background-image: url(../images/Icons/arrow-next.svg);
+                }
+                .slick-prev {
+                    z-index: 2;
+                    left: -70px;
+                    background-image: url(../images/Icons/arrow-prev.svg);
+                }
+                &__text {
+                    margin-top: 10px;
+                    color: rgba(255, 255, 255, 0.5);
+                    &-link {
+                        @extend %Poppins-600;
+                        color: #fff;
+                        margin-left: 16px;
+                        background-image: url(../images/Icons/arrow-next.svg);
+                        background-position: right;
+                        background-repeat: no-repeat;
+                        background-size: 14px;
+                        padding-right: 15px;
+                    }
+                }
+            }
