@@ -24,11 +24,16 @@
         "gulp-ttf2woff2": "^4.0.1",
         "gulp-uglify": "^3.0.2",
         "gulp-webp": "^4.0.1",
+        "gulp-webp-for-html": "^1.0.4",
+        "gulp-webp-html": "^1.0.2",
         "gulp-webp-html-nosvg": "^1.0.2",
         "gulp-webpcss": "^1.1.1",
+        "gulp-xv-webp-html": "^1.1.2",
         "jquery": "^3.6.0",
+        "plugin-error": "^1.0.1",
         "sass": "^1.43.4",
         "slick-carousel": "^1.8.1",
+        "through2": "^4.0.2",
         "webp-converter": "^2.2.3"
     }
 }

@@ -1,6 +1,5 @@
 const { src, dest, watch, parallel, series } = require("gulp");
 const scss = require("gulp-sass")(require("sass"));
-const autoprefixer = require("gulp-autoprefixer"); //
 const concat = require("gulp-concat"); // Обеъденинение нескольких файлов в один
 const uglify = require("gulp-uglify"); // Сжатие скриптов
 const csso = require("gulp-csso"); // сжатие цсс
@@ -8,7 +7,10 @@ const cssClean = require("gulp-clean-css"); // сжатие цсс
 const imagemin = require("gulp-imagemin"); // Сжатие картинок
 const webp = require("gulp-webp"); // создание вебп
 const webpcss = require("gulp-webpcss"); // класы вебп в цсс
+// const webpNoSvg = require("gulp-webp-html"); // не обертывать свг
 const webpNoSvg = require("gulp-webp-html-nosvg"); // не обертывать свг
+// const webpNoSvg = require("gulp-webp-for-html"); // не обертывать свг
+// const webpNoSvg = require("gulp-xv-webp-html"); // не обертывать свг
 const size = require("gulp-size"); // сила сжатия
 const notify = require("gulp-notify"); // объявления
 const fs = require("fs");
@@ -162,12 +164,20 @@ function images() {
         .pipe(dest("app/images/"));
 }
 
-function build() {
-    return src(["app/**/*.html", "app/css/style.min.css", "app/js/main.min.js", "app/fonts/**/*.woff", "app/fonts/**/*.woff2"], {
-            base: "app",
-        })
+function htmlWebp() {
+    return src("dist/**/*.html")
         .pipe(webpNoSvg())
         .pipe(dest("dist"));
+}
+
+
+
+function build() {
+    return src(["app/**/*.html", "app/images/**/*.*", "app/css/style.min.css", "app/js/main.min.js", "app/fonts/**/*.woff", "app/fonts/**/*.woff2"], {
+        base: "app",
+    })
+
+    .pipe(dest("dist"));
 }
 
 function cleanDist() {
@@ -184,10 +194,9 @@ function watching() {
 exports.styles = styles;
 exports.scripts = scripts;
 exports.syncBrowser = syncBrowser;
-exports.images = images;
 exports.watching = watching;
-// exports.fontsStyle = fontsStyle;
+exports.images = images;
 exports.fonts = series(fonts, fonts2, fontsStyle)
 exports.cleanDist = cleanDist;
-exports.build = series(cleanDist, images, build);
+exports.build = series(cleanDist, images, build, htmlWebp);
 exports.default = parallel(images, styles, scripts, syncBrowser, watching);
